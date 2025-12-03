@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Family</title>
+</head>
+<body>
+<h1>Create Family and Students</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <h3>Family Info</h3>
+    {{ family_form.as_p }}
+
+    <h3>Add Students</h3>
+    <div id="students-container">
+        <div class="student-row">
+            <input type="text" name="student_name[]" placeholder="Student Name">
+            <input type="text" name="student_class[]" placeholder="Student Class">
+        </div>
+    </div>
+
+    <button type="button" onclick="addStudent()">Add More Student</button>
+    <button type="submit">Save Family</button>
+</form>
+
+<script>
+function addStudent() {
+    const container = document.getElementById("students-container");
+    const row = document.createElement("div");
+    row.className = "student-row";
+    row.innerHTML = `
+        <input type="text" name="student_name[]" placeholder="Student Name">
+        <input type="text" name="student_class[]" placeholder="Student Class">
+    `;
+    container.appendChild(row);
+}
+</script>
+</body>
+</html>
